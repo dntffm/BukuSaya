@@ -103,13 +103,23 @@
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
-                            <div class="header__top__right__auth">
-                                <a href="{{url('/register')}}">Daftar</a>
-                            </div>
-                            &nbsp;
-                            <div class="header__top__right__auth">
-                                <a href="{{url('/login')}}">Login</a>
-                            </div>
+                            @guest    
+                                <div class="header__top__right__auth">
+                                    <a href="{{url('/register')}}">Daftar</a>
+                                </div>
+                                &nbsp;
+                                <div class="header__top__right__auth">
+                                    <a href="{{url('/login')}}">Login</a>
+                                </div>
+                            @endguest
+                            @auth    
+                                <div class="header__top__right__auth">
+                                    <a href="{{url('/logout')}}" onclick="event.preventDefault(); document.querySelector('#logout-form').submit()">Logout</a>
+                                </div>
+                            @endauth
+                            <form action="{{url('/logout')}}" method="POST" style="display: none" id="logout-form">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
