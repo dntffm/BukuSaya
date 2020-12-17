@@ -1,13 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="container">
+<div class="mt-5 mb-5 container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
                 <div class="card-body">
+                    <h3 class="card-title">{{ __('Reset Password') }}</h3>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -33,7 +32,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="site-btn">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>

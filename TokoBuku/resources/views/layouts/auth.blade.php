@@ -68,12 +68,9 @@
                             <a href="{{url('/')}}"><img src="{{asset('img/logo_transparent.png')}}" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection"
-                                    class="__cf_email__"
-                                    data-cfemail="670f020b0b082704080b08150b0e054904080a">[email&#160;protected]</a>
-                            </li>
+                            <li>Address: JL. jalan Kabupaten Jember</li>
+                            <li>Phone: +62 11.188.888</li>
+                            <li>Email: tokobuku@tokobuku.id</li>
                         </ul>
                     </div>
                 </div>
