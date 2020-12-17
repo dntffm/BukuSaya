@@ -4,10 +4,9 @@
 <div class="mt-5 mb-5 container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
                 <div class="card-body">
+                    <h3 class="card-title">{{ __('Register') }}</h3>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -63,7 +62,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="site-btn">
                                     {{ __('Register') }}
                                 </button>
                             </div>

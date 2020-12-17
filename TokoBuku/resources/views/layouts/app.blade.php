@@ -126,8 +126,8 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{{url("/")}}">Beranda</a></li>
-                            <li><a href="shop-grid.html">Toko</a></li>
-                            <li><a href="contact.html">Kontak</a></li>
+                            <li><a href="{{url('/shop')}}">Toko</a></li>
+                            <li><a href="{{url('/contact')}}">Kontak</a></li>
                         </ul>
                     </nav>
                 </div>
