@@ -18,4 +18,6 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::resource('shop', 'ShopController');
 Route::get('/shop/product/{id}','ShopController@showproduct');
-Route::resource('cart', 'CartController');
+Route::get('/cart', 'CartController@index');
+Route::get('/cart/checkout','CartController@checkout');
+Route::get('/cart/addtocart/{id}','CartController@addToCart');

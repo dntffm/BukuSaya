@@ -24,6 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         $data = Category::all();
+
         return view('home',compact("data"));
     }
 

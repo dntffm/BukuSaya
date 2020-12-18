@@ -26,23 +26,26 @@
 </head>
 
 <body>
-
+    
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
+    
     <div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
+    {{-- mobile --}}
+   {{--  <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
             <a href="#"><img src="img/logo.png" alt=""></a>
         </div>
+            
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                 <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">item: <span></span></div>
         </div>
+        
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="img/language.png" alt="">
@@ -88,7 +91,7 @@
                 <li>Free Shipping for all Order of $99</li>
             </ul>
         </div>
-    </div>
+    </div> --}}
 
 
     <header class="header">
@@ -157,9 +160,20 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li>
+                                <a href="{{url('/cart')}}">
+                                    <i class="fa fa-shopping-bag"></i>
+                                    @if (session('cart') == null)
+                                        <span>0</span>
+                                    @else
+                                        <span>{{count(session('cart'))}}</span>
+                                    @endif
+                                </a>
+                            </li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        @auth
+                            <div class="header__cart__price">item: <span>$150.00</span></div>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -271,6 +285,7 @@
 
         gtag('config', 'UA-23581568-13');
     </script>
+    @include('vendor.sweetalert.alert')
 </body>
 
 <!-- Mirrored from preview.colorlib.com/theme/ogani/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Dec 2020 04:03:50 GMT -->
