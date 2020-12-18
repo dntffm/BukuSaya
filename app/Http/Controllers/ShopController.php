@@ -14,7 +14,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $data = Category::with('book')->get();
+        $data = Book::all();
         return view('shop',compact("data"));
     }
     

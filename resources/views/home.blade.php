@@ -64,7 +64,7 @@
                 @foreach ($data as $item)   
                 <div class="col-lg-3">
                     <div class="categories__item set-bg" data-setbg="img/categories/cat-5.jpg">
-                        <h5><a href="#">{{$item->category_name}}</a></h5>
+                        <h5><a href="{{url('/shop').'/'.$item->category_name}}">{{$item->category_name}}</a></h5>
                     </div>
                 </div>
                 @endforeach
@@ -104,7 +104,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">{{$it->title}}</a></h6>
+                            <h6><a href="{{url('/shop/product').'/'.$it->id}}">{{$it->title}}</a></h6>
                             <h5>{{$it->price}}</h5>
                         </div>
                     </div>
