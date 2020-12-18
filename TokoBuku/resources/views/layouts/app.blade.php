@@ -112,11 +112,23 @@
                                     <a href="{{url('/login')}}">Login</a>
                                 </div>
                             @endguest
-                            @auth    
-                                <div class="header__top__right__auth">
-                                    <a href="{{url('/logout')}}" onclick="event.preventDefault(); document.querySelector('#logout-form').submit()">Logout</a>
+                            @auth   
+                            <div class="header__top__right__auth">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Hello, {{Auth::user()->name}}
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">            
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{url('/logout')}}" onclick="event.preventDefault(); document.querySelector('#logout-form').submit()">Logout</a>
+                                    </div>
                                 </div>
+                            </div>
+                            
                             @endauth
+                            
                             <form action="{{url('/logout')}}" method="POST" style="display: none" id="logout-form">
                                 @csrf
                             </form>
@@ -239,6 +251,7 @@
 
 
     <script src="{{asset("js/jquery-3.3.1.min.js")}}"></script>
+    <script src="{{asset("js/popper.min.js")}}"></script>
     <script src="{{asset("js/bootstrap.min.js")}}"></script>
     <script src="{{asset("js/jquery.nice-select.min.js")}}"></script>
     <script src="{{asset("js/jquery-ui.min.js")}}"></script>

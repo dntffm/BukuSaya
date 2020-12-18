@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Category;
+use App\Book;
 class ShopController extends Controller
 {
     /**
@@ -13,9 +14,10 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('shop');
+        $data = Category::with('book')->get();
+        return view('shop',compact("data"));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -45,9 +47,16 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        //
+       $data = Category::where("category_name","=",$id)->firstOrFail()->book;
+       return view('shop',compact("data"));
     }
 
+
+    public function showproduct($id)
+    {
+        $data = Book::where('id','=',$id)->firstOrFail();
+        return view('shop-detail',compact("data"));
+    }
     /**
      * Show the form for editing the specified resource.
      *
