@@ -8,7 +8,7 @@
             @endforeach
         </ul>
     </div>
-    <div class="sidebar__item">
+    {{-- <div class="sidebar__item">
         <h4>Price</h4>
         <div class="price-range-wrap">
             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -24,33 +24,24 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="sidebar__item">
         <div class="latest-product__text">
             <h4>Buku Baru</h4>
             <div class="latest-product__slider owl-carousel">
-                <div class="latest-prdouct__slider__item">
-                    <a href="#" class="latest-product__item">
-                        <div class="latest-product__item__pic">
-                            <img src="{{asset("img/latest-product/lp-1.jpg")}}" alt="">
-                        </div>
-                        <div class="latest-product__item__text">
-                            <h6>Crab Pool Security</h6>
-                            <span>$30.00</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="latest-prdouct__slider__item">
-                    <a href="#" class="latest-product__item">
-                        <div class="latest-product__item__pic">
-                            <img src="img/latest-product/lp-1.jpg" alt="">
-                        </div>
-                        <div class="latest-product__item__text">
-                            <h6>Crab Pool Security</h6>
-                            <span>$30.00</span>
-                        </div>
-                    </a>
-                </div>
+                @foreach (App\Book::limit(5)->get() as $item)             
+                    <div class="latest-prdouct__slider__item">
+                        <a href="{{url('/shop/product').'/'.$item->id}}" class="latest-product__item">
+                            <div class="latest-product__item__pic">
+                                <img src="{{asset("img/latest-product/lp-1.jpg")}}" alt="">
+                            </div>
+                            <div class="latest-product__item__text">
+                                <h6>{{$item->title}}</h6>
+                                <span>{{$item->price}}</span>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

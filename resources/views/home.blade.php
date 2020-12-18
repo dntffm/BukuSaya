@@ -43,12 +43,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                <div class="hero__item set-bg" data-setbg="{{asset('img/hero/banner2.jpg')}}">
                     <div class="hero__text">
-                        <span>FRUIT FRESH</span>
-                        <h2>Vegetable <br />100% Organic</h2>
-                        <p>Free Pickup and Delivery Available</p>
-                        <a href="#" class="primary-btn">SHOP NOW</a>
+                        <span class="text-light">BUKU BAGUS TIAP HARI</span>
+                        <h2>BUKU APA AJA<br /> TERSEDIA</h2>
+                        <p>Bebas Pesan dan Antar Kapan Aja</p>
+                        <a href="{{url('/shop')}}" class="primary-btn">BELI BUKU SEKARANG</a>
                     </div>
                 </div>
             </div>
@@ -141,29 +141,19 @@
                 <div class="latest-product__text">
                     <h4>Baru Rilis</h4>
                     <div class="latest-product__slider owl-carousel">
-                        <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="img/latest-product/lp-1.jpg" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            
-                        </div>
-                        <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="img/latest-product/lp-1.jpg" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                        </div>
+                        @foreach (App\Book::limit(5)->get() as $item)              
+                            <div class="latest-prdouct__slider__item">
+                                <a href="{{url('/shop/product').'/'.$item->id}}" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>{{$item->title}}</h6>
+                                        <span>{{$item->price}}</span>
+                                    </div>
+                                </a>   
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

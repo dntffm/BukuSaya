@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Book;
+
 class ShopController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $data = Book::all();
+        $data = Book::paginate(10);
+        $data->withPath('shop/');
         return view('shop',compact("data"));
     }
     
