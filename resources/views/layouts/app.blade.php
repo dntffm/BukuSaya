@@ -166,7 +166,7 @@
                                     @if (session('cart') == null)
                                         <span>0</span>
                                     @else
-                                        <span>{{count(session('cart'))}}</span>
+                                        <span>{{count(\Cart::getContent())}}</span>
                                     @endif
                                 </a>
                             </li>

@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
+use Cart;
+use Illuminate\Support\Str;
 class CartController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('cart');
@@ -17,14 +22,20 @@ class CartController extends Controller
         return view('checkout');
     }
    
-    public function addToCart($id)
+    public function addToCart(Request $request,$id)
     {
         
-        /* $data = [];
-        $request->session()->put('cart',$data);
-        return count($request->session()->get('cart')); */
+        $data = Book::find($id);
+        $key = Str::random(4);
+        Cart::add(array(
+           'id' => $key,
+           'name' => $data->title,
+           'price' => $data->price,
+           'quantity' => 1
+        )
+        );
 
-        alert()->success('Berhasil','Buku Telah ditambahkan Ke Keranjang')->persistent(false);
+        alert()->success('Berhasil','Barang Ditambah ke Keranjang');
         return view('/cart');
     }
 }

@@ -37,28 +37,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-1.jpg" alt="">
-                                    <h5>Vegetable’s Package</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    $55.00
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
+                            @foreach (\Cart::getContent() as $item)
+                               
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="img/cart/cart-1.jpg" alt="">
+                                        <h5>{{$item->name}}</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        {{$item->price}}
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" value="{{$item->quantity}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    $110.00
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        {{$item->quantity * $item->price}}
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <span class="icon_close"></span>
+                                    </td>
+                                </tr>
+                            @endforeach
                             
                         </tbody>
                     </table>
