@@ -1,9 +1,5 @@
 <?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Book;
+    
 use Cart;
 use Illuminate\Support\Str;
 class CartController extends Controller
