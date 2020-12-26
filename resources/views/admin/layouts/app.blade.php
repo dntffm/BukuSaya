@@ -13,10 +13,10 @@
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="../node_modules/jqvmap/dist/jqvmap.min.css">
+    {{-- <link rel="stylesheet" href="../node_modules/jqvmap/dist/jqvmap.min.css">
     <link rel="stylesheet" href="../node_modules/summernote/dist/summernote-bs4.css">
     <link rel="stylesheet" href="../node_modules/owl.carousel/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="../node_modules/owl.carousel/dist/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../node_modules/owl.carousel/dist/assets/owl.theme.default.min.css"> --}}
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('vendor/stisla/css/style.css')}}">
@@ -85,6 +85,22 @@
 
             <!-- Main Content -->
             <div class="main-content">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('errorfile'))
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>{{ session('errorfile') }}</li>
+                    </ul>
+                </div>
+                @endif
                 @yield('content')
             </div>
             <footer class="main-footer">
@@ -98,7 +114,7 @@
             </footer>
         </div>
     </div>
-
+    
     <!-- General JS Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -110,14 +126,15 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
+    <script src="{{asset('/vendor/stisla/js/stisla.js')}}"></script>
+    
 
     <!-- JS Libraies -->
-    <script src="../node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    {{-- <script src="../node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="../node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="../node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
     <script src="../node_modules/summernote/dist/summernote-bs4.js"></script>
-    <script src="../node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+    <script src="../node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script> --}}
 
     <!-- Template JS File -->
     <script src="{{asset('vendor/stisla/js/scripts.js')}}"></script>
@@ -125,6 +142,103 @@
 
     <!-- Page Specific JS File -->
     <script src="{{asset('vendor/stisla/js/page/index.js')}}"></script>
+    <script>
+        $('#tambahBuku').fireModal({
+            title : 'Tambah Buku Baru',
+            body : `
+                <form action="{{url('/admin/product-admin')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                      <label>Gambar Buku (png,jpg)</label>
+                      <input name="cover" type="file" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Judul Buku</label>
+                      <input name="judul" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Harga Buku</label>
+                      <input name="harga" type="number" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Penerbit</label>
+                      <input name="penerbit" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Penulis</label>
+                      <input name="penulis" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Stock</label>
+                      <input name="stock" type="number" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Kategori</label>
+                      <select name="kategori" class="form-control">
+                        <option>--Pilih Kategori--</option>
+                        @foreach(App\Category::all() as $item)
+                            <option value="{{$item->id}}">{{$item->category_name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                   
+                    <button class="btn btn-primary" type="submit">Simpan</button>
+                    
+                  </div>  
+                </form>
+            `,
+            center : true
+        })
+        $('#tambahKategori').fireModal({
+            title : 'Tambah Kategori Buku Baru',
+            body : `
+                <form action="{{url('/admin/categoryadm')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                      <label>Nama Kategori</label>
+                      <input name="kategori" type="text" class="form-control">
+                    </div>
+                    
+                   
+                    <button class="btn btn-primary" type="submit">Simpan</button>
+                    
+                  </div>  
+                </form>
+            `,
+            center : true
+        })
+        $('.detailbuku').on('click',function(){
+            let id = this.dataset.id
+            let xhr = new XMLHttpRequest()
+            let uri = encodeURI('http://localhost/tokobuku/BukuSaya/public/admin/product-admin/'+id)
+            xhr.open('GET',uri,false)
+            
+            try{
+                xhr.send()
+                if(xhr.status != 200){
+                    alert(`Error ${xhr.status}: ${xhr.statusText}`);
+                }else{
+                    let response = JSON.parse(xhr.responseText)
+                    
+                    $('.detailbuku').fireModal({
+                        title : 'Detail '+response.title,
+                        body : `
+                        <ul class="list-group">
+                            <li class="list-group-item">Judul Buku: ${response.title}</li>
+                            <li class="list-group-item">Harga : ${response.price}</li>
+                            <li class="list-group-item">Kategori : ${response.category[0].category_name}</li>
+                            <li class="list-group-item">Penulis : ${response.author}</li>
+                            <li class="list-group-item">Penerbit : ${response.publisher}</li>
+                        </ul>
+                        `
+                    })
+                }
+            }catch(err){
+                console.log(err)
+            }
+
+        })
+    </script>
 </body>
 
 </html>
