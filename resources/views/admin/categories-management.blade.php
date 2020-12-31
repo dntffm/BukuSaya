@@ -16,7 +16,6 @@
   <div class="section-body">
     <h2 class="section-title">Kategori Buku</h2>
     <p class="section-lead">kategori Buku Toko Online TokoBuku</p>
-
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -48,8 +47,7 @@
                       <td>{{$item->category_name}}</td>
                       <td>
                         <div class="btn-group mb-3" role="group" aria-label="Basic example">
-                          {{-- <button class="btn btn-primary detailbuku" data-id="{{$item->id}}"><i class="fas fa-eye"></i></button>
-                          <a href="" class="btn btn-primary"><i class="fas fa-edit"></i></a> --}}
+                          <button class="btn btn-primary editkategori" id="editkategori-{{$item->id}}" data-id="{{$item->id}}"><i class="fas fa-edit"></i></button>
                           <a href="{{url('/admin/categoryadm/').'/'.$item->id}}" class="btn btn-primary" onclick="
                             event.preventDefault()
                             if(confirm('yakin')){
@@ -64,7 +62,7 @@
                   @method('delete')
                 </form>
                 @endforeach
-                {{-- {{$data->links()}} --}}
+                {{$data->links()}}
               </table>
             </div>
           </div>

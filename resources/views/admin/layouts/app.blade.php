@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <meta name="csrf-token" content="{{csrf_token()}}"/>
     <title>Ecommerce Dashboard &mdash; Stisla</title>
 
     <!-- General CSS Files -->
@@ -143,6 +144,45 @@
     <!-- Page Specific JS File -->
     <script src="{{asset('vendor/stisla/js/page/index.js')}}"></script>
     <script>
+        function reqData(url,method,async,datas)
+        {
+            let data = null;
+            let xhr = new XMLHttpRequest()
+            if(method === 'GET')
+            {
+                xhr.open(method,url,async)
+                try{
+                    xhr.send()
+                    if(xhr.status != 200)
+                    {
+                        alert(`Error ${xhr.status}: ${xhr.statusText}`);
+                    }else{
+                        data = xhr.responseText
+                    }
+                }catch(err){
+                    alert(err)
+                }
+            }
+            /* else if(method === 'PATCH'){
+                xhr.open(method,url,async)
+                xhr.setRequestHeader('Content-Type','Application/x-www-form-urlencoded')
+                xhr.setRequestHeader('Accept','application/json')
+                xhr.setRequestHeader('x-csrf-token',$('meta[name="csrf-token"]').attr('content'))
+                try{
+                    xhr.send(data)
+                    if(xhr.status != 200)
+                    {
+                        alert(`Error ${xhr.status}: ${xhr.statusText}`);
+                    }else{
+                        data = xhr.responseText
+                    }
+                }catch(err){
+                    alert(err)
+                }
+            } */
+            return JSON.parse(data)
+        }
+
         $('#tambahBuku').fireModal({
             title : 'Tambah Buku Baru',
             body : `
@@ -209,34 +249,99 @@
         })
         $('.detailbuku').on('click',function(){
             let id = this.dataset.id
-            let xhr = new XMLHttpRequest()
-            let uri = encodeURI('http://localhost/tokobuku/BukuSaya/public/admin/product-admin/'+id)
-            xhr.open('GET',uri,false)
-            
-            try{
-                xhr.send()
-                if(xhr.status != 200){
-                    alert(`Error ${xhr.status}: ${xhr.statusText}`);
-                }else{
-                    let response = JSON.parse(xhr.responseText)
-                    
-                    $('.detailbuku').fireModal({
-                        title : 'Detail '+response.title,
-                        body : `
+            let uri = encodeURI('http://localhost/tokobuku/BukuSaya/public/admin/product-admin/' + id)
+            let data = reqData(uri, 'GET', false)
+            $('#detailbuku-'+id).fireModal({
+                title: 'Detail ' + data.title,
+                body: `
                         <ul class="list-group">
-                            <li class="list-group-item">Judul Buku: ${response.title}</li>
-                            <li class="list-group-item">Harga : ${response.price}</li>
-                            <li class="list-group-item">Kategori : ${response.category[0].category_name}</li>
-                            <li class="list-group-item">Penulis : ${response.author}</li>
-                            <li class="list-group-item">Penerbit : ${response.publisher}</li>
+                            <li class="list-group-item">Judul Buku: ${data.title}</li>
+                            <li class="list-group-item">Harga : ${data.price}</li>
+                            <li class="list-group-item">Kategori : ${data.category[0].category_name}</li>
+                            <li class="list-group-item">Penulis : ${data.author}</li>
+                            <li class="list-group-item">Penerbit : ${data.publisher}</li>
                         </ul>
                         `
-                    })
-                }
-            }catch(err){
-                console.log(err)
-            }
-
+            })
+        })
+        $('.editbuku').on('click',function(){
+            let id = this.dataset.id
+            let uri = encodeURI('http://localhost/tokobuku/BukuSaya/public/admin/product-admin/' + id +'/edit')
+            let data = reqData(uri,'GET',false)
+            console.log(data)
+            $('#editbuku-'+id).fireModal({
+                title : 'Edit Product',
+                body : `
+                <form action="{{url('/admin/product-admin/${data.id}')}}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <input name="catid" type="hidden" value="${data.category[0].id}" class="form-control">
+                    <div class="form-group">
+                      <label>Gambar Buku (png,jpg)</label>
+                      <input name="cover" type="file" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Judul Buku</label>
+                      <input name="judul" type="text" value="${data.title}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Harga Buku</label>
+                      <input name="harga" type="number" value="${data.price}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Penerbit</label>
+                      <input name="penerbit" type="text" value="${data.author}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Penulis</label>
+                      <input name="penulis" type="text" value="${data.author}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Stock</label>
+                      <input name="stock" type="number" value=${data.stock} class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Kategori</label>
+                      <select name="kategori" class="form-control">
+                        <option value="1">--Pilih Kategori--</option>
+                        @foreach(App\Category::all() as $item)
+                            <option value="{{$item->id}}">{{$item->category_name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    
+                   
+                    <button class="btn btn-primary" type="submit">Simpan</button>
+                    
+                  </div>  
+                </form>
+                `,
+                center : true
+            })
+        })
+        $('.editkategori').on('click',function(){
+            let id = this.dataset.id
+            let uri = encodeURI('http://localhost/tokobuku/BukuSaya/public/admin/categoryadm/' + id +'/edit')
+            let data = reqData(uri,'GET',false)
+            $('#editkategori-'+id).fireModal({
+                title : 'Edit Kategori',
+                body : `
+                <form action="{{url('/admin/categoryadm/${data.id}')}}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <div class="form-group">
+                      <label>Nama Kategori</label>
+                      <input value="${data.category_name}" name="kategori" type="text" class="form-control">
+                    </div>
+                    
+                   
+                    <button class="btn btn-primary" type="submit">Simpan</button>
+                    
+                  </div>  
+                </form>
+                `,
+                center : true
+            })
         })
     </script>
 </body>

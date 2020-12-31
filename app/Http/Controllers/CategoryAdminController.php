@@ -15,6 +15,22 @@ class CategoryAdminController extends Controller
         return redirect()->back();
     }
 
+    public function edit($id)
+    {
+        return Category::find($id);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = Category::find($id);
+        $data->category_name = $request->kategori;
+        $message = "Ubah Kategori Gagal";
+        if($data->save())
+        {
+            $message = "Ubah Kategori Brehasil";
+        }
+        return redirect()->back()->with('status',$message);
+    }
     public function destroy($id)
     {
         $category = Category::find($id);

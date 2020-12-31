@@ -97,7 +97,7 @@ class AdminProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Book::where('id','=',$id)->with('category')->firstOrFail();
     }
 
     /**
@@ -109,7 +109,23 @@ class AdminProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->cover == null)
+        {
+            //upload file
+        }
+
+        $book = Book::find($id);
+        $book->title = $request->judul;
+        $book->author = $request->penulis;
+        $book->publisher = $request->penerbit;
+        $book->price = $request->harga;
+        $book->stock = $request->stock;
+        $book->category()->updateExistingPivot($request->catid,['category_id'=>$request->kategori]);
+        
+        if($book->save())
+        {
+            return redirect('/admin/shop');
+        }
     }
 
     /**
