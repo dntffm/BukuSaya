@@ -157,17 +157,14 @@
                         </ul>
                     </nav>
                 </div>
+               
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
                             <li>
                                 <a href="{{url('/cart')}}">
                                     <i class="fa fa-shopping-bag"></i>
-                                    @if (session('cart') == null)
-                                        <span>0</span>
-                                    @else
-                                        <span>{{count(\Cart::getContent())}}</span>
-                                    @endif
+                                    <span>{{count(\Cart::getContent())}}</span>
                                 </a>
                             </li>
                         </ul>

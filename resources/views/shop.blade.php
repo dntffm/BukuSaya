@@ -11,12 +11,12 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
+                        <form action="{{url('/search')}}" method="GET">
                             <div class="hero__search__categories">
                                 Semua Kategori
                                 <span class="arrow_carrot-down"></span>
                             </div>
-                            <input type="text" placeholder="Ingin baca buku apa, saudara?">
+                            <input name="search" type="text" placeholder="Ingin baca buku apa, saudara?">
                             <button type="submit" class="site-btn">Cari...</button>
                         </form>
                     </div>
@@ -55,7 +55,7 @@
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="{{url('/cart/addtocart').'/'}}"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
@@ -100,7 +100,7 @@
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="{{url('/cart/addtocart').'/'.$item->id}}"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
