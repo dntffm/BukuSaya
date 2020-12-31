@@ -24,9 +24,9 @@ class CartController extends Controller
     {
         
         $data = Book::find($id);
-        $key = Str::random(4);
+       
         Cart::add(array(
-           'id' => $key,
+           'id' => $data->id,
            'name' => $data->title,
            'price' => $data->price,
            'quantity' => 1

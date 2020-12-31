@@ -21,6 +21,7 @@ Route::get('/shop/product/{id}','ShopController@showproduct');
 Route::get('/cart', 'CartController@index');
 Route::get('/cart/checkout','CartController@checkout');
 Route::get('/cart/addtocart/{id}','CartController@addToCart');
+Route::resource('/cart/transaction','TransactionController');
 Route::get('/admin','AdminController@index')->middleware('role:admin')->name('admin.page');
 Route::get('/admin/shop','AdminController@shop')->middleware('role:admin');
 Route::get('/admin/categories','AdminController@categories')->middleware('role:admin');
