@@ -20,11 +20,11 @@
 
 <section class="checkout spad">
     <div class="container">
-       
         <div class="checkout__form">
             <h4>Detail Transaksi</h4>
             <form action="{{url('/cart/transaction')}}" method="POST">
                 @csrf
+                <input type="hidden" name="iduser" value="{{Auth::user()->id}}">
                 <input type="hidden" name="bukus" value="{{\Cart::getContent()}}">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
@@ -59,26 +59,26 @@
 
                        
                     </div>
+                    @if (count(\Cart::getContent()) > 0)
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
                             <h4>Transaksi Kamu</h4>
                             <div class="checkout__order__products">Produk <span>Total</span></div>
                             <ul>
-                                @if (count(\Cart::getContent()) > 0)
                                     <?php  $total = 0; ?>
                                     @foreach (\Cart::getContent() as $item)
                                         <?php $total += $item->price; ?>
                                         <li>{{$item->name}} <span>{{$item->price}}</span></li>
                                     @endforeach
-                                @endif
-                            </ul>
-                            
-                            <div class="checkout__order__total">Total <span>{{$total}}</span></div>
-                            
-                            <button type="submit" class="site-btn">BAYAR SEKARANG</button>
+                                </ul>
+                                
+                                <div class="checkout__order__total">Total <span>{{$total}}</span></div>
+                                
+                                <button type="submit" class="site-btn">BAYAR SEKARANG</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    @endif
             </form>
         </div>
     </div>

@@ -12,4 +12,8 @@ class Book extends Model
     {
         return $this->belongsToMany('App\Category');
     }
+    public function transaction()
+    {
+        return $this->belongsToMany('App\Transaction','book_transactions');
+    }
 }

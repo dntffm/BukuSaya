@@ -4,12 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Transaction;
+
 class TransactionController extends Controller
 {
     public function store(Request $request)
     {
-        $books = json_decode($request->bukus,true);
+       
+        $trans = new Transaction;
 
-        $save = Transaction::insert($books);
+        $trans->user_id = $request->iduser;
+        $trans->recipient = $request->penerima;
+        $trans->address = $request->alamat.' Kota '.$request->kota.' '.$request->kodepos;
+        $trans->phone = $request->telepon;
+        $newTrans = Transaction::latest()->take(1)->firstOrFail(); 
+        if( $trans->save()){
+            $books = json_decode($request->bukus,true);
+            foreach($books as $item){
+                $data = [
+                    "amount" =>$item["price"]*$item["quantity"],
+                    "pay_amount" =>$item["price"]*$item["quantity"],
+                ];
+                $newTrans->book()->attach($item["id"],$data);
+            }
+            \Cart::clear();
+            alert()->success('Berhasil','Pembayaran Berhasil, Tunggu Paket Buku akan datang :))');
+            return redirect()->back();
+        }
     }
 }
