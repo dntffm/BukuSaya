@@ -26,10 +26,7 @@
                 <div class="hero__search">
                     <div class="hero__search__form">
                         <form action="{{url('/search')}}" method="GET">
-                            <div class="hero__search__categories">
-                                Semua Kategori
-                                <span class="arrow_carrot-down"></span>
-                            </div>
+                            
                             <input name="search" type="text" placeholder="Ingin baca buku apa, saudara?">
                             <button type="submit" class="site-btn">Cari...</button>
                         </form>
@@ -58,7 +55,7 @@
 </section>
 
 
-<section class="categories">
+{{-- <section class="categories">
     <div class="container">
         <div class="row">
             <div class="categories__slider owl-carousel">
@@ -72,7 +69,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 
 <section class="featured spad">
@@ -99,8 +96,8 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
                             <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                {{-- <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li> --}}
                                 <li><a href="{{url('/cart/addtocart').'/'.$it->id}}"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -117,25 +114,10 @@
 </section>
 
 
-<div class="banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner-1.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner-2.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-<section class="latest-product spad">
+
+{{-- <section class="latest-product spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-8">
@@ -189,7 +171,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 
 @endsection

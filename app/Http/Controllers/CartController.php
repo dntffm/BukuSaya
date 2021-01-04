@@ -34,6 +34,6 @@ class CartController extends Controller
         );
 
         alert()->success('Berhasil','Barang Ditambah ke Keranjang');
-        return view('/cart');
+        return redirect('/cart');
     }
 }

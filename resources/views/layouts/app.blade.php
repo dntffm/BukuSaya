@@ -152,7 +152,7 @@
                         <ul>
                             <li class="active"><a href="{{url("/")}}">Beranda</a></li>
                             <li><a href="{{url('/shop')}}">Toko</a></li>
-                            <li><a href="{{url('/cart/checkout')}}">Checkout</a></li>
+                            {{-- <li><a href="{{url('/cart/checkout')}}">Checkout</a></li> --}}
                             <li><a href="{{url('/contact')}}">Kontak</a></li>
                         </ul>
                     </nav>
@@ -168,9 +168,7 @@
                                 </a>
                             </li>
                         </ul>
-                        @auth
-                            <div class="header__cart__price">item: <span>$150.00</span></div>
-                        @endauth
+                        
                     </div>
                 </div>
             </div>

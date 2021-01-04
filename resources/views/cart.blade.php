@@ -37,8 +37,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $total = 0; ?>
                             @foreach (\Cart::getContent() as $item)
-                               
+                               <?php $total += $item->price ?>
                                 <tr>
                                     <td class="shoping__cart__item">
                                         <img src="img/cart/cart-1.jpg" alt="">
@@ -71,30 +72,21 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">Cari Buku Yang Lain</a>
+                    <a href="{{url('/shop')}}" class="primary-btn cart-btn">Cari Buku Yang Lain</a>
                     <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                         Update Keranjang</a>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>KODE VOUCHER</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Masukkan Kode Voucher">
-                            <button type="submit" class="site-btn">CEK</button>
-                        </form>
-                    </div>
-                </div>
+                
             </div>
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Keranjang Beli</h5>
                     <ul>
-                        <li>Subtotal <span>$454.98</span></li>
-                        <li>Total <span>$454.98</span></li>
+                        <li>Total <span>{{$total}}</span></li>
                     </ul>
-                    <a href="{{url('/cart/checkout/placeorder')}}" class="primary-btn">CHECKOUT SEKARANG</a>
+                    <a href="{{url('/cart/checkout')}}" class="primary-btn">CHECKOUT SEKARANG</a>
                 </div>
             </div>
         </div>
