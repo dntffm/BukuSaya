@@ -27,7 +27,7 @@
                 <input type="hidden" name="iduser" value="{{Auth::user()->id}}">
                 <input type="hidden" name="bukus" value="{{\Cart::getContent()}}">
                 <div class="row">
-                    <div class="col-lg-8 col-md-6">
+                    <div class="col-lg-6 col-md-4">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="checkout__input">
@@ -60,7 +60,7 @@
                        
                     </div>
                     @if (count(\Cart::getContent()) > 0)
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-6 col-md-4">
                         <div class="checkout__order">
                             <h4>Transaksi Kamu</h4>
                             <div class="checkout__order__products">Produk <span>Total</span></div>

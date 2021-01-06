@@ -36,14 +36,15 @@
                                 <th></th>
                             </tr>
                         </thead>
+                        <form action="{{url('/cart/checkout/update')}}" method="POST">
+                            @csrf
                         <tbody>
-                            <?php $total = 0; ?>
                             @foreach (\Cart::getContent() as $item)
-                               <?php $total += $item->price ?>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="img/cart/cart-1.jpg" alt="">
-                                        <h5>{{$item->name}}</h5>
+                                <input type="hidden" name="id[]" value="{{$item->id}}">
+                               <tr>
+                                   <td class="shoping__cart__item">
+                                       <img src="img/cart/cart-1.jpg" alt="">
+                                       <h5>{{$item->name}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
                                         {{$item->price}}
@@ -51,7 +52,7 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="{{$item->quantity}}">
+                                                <input type="text" name="jml[]" value="{{$item->quantity}}">
                                             </div>
                                         </div>
                                     </td>
@@ -59,24 +60,25 @@
                                         {{$item->quantity * $item->price}}
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
+                                        <a href="{{url('/cart/checkout/delete').'/'.$item->id}}" onclick="return confirm('Are You Sure ?')"> <span class="icon_close"></span></a>
                                     </td>
                                 </tr>
-                            @endforeach
-                            
-                        </tbody>
-                    </table>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shoping__cart__btns">
-                    <a href="{{url('/shop')}}" class="primary-btn cart-btn">Cari Buku Yang Lain</a>
-                    <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                        Update Keranjang</a>
-                </div>
-            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a href="{{url('/shop')}}" class="primary-btn cart-btn">Cari Buku Yang Lain</a>
+                        <button type="submit" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                            Update Keranjang</button>
+                        </div>
+                    </div>
+                </form>
             <div class="col-lg-6">
                 
             </div>
@@ -84,9 +86,9 @@
                 <div class="shoping__checkout">
                     <h5>Keranjang Beli</h5>
                     <ul>
-                        <li>Total <span>{{$total}}</span></li>
+                        <li>Total <span>{{Cart::getTotal()}}</span></li>
                     </ul>
-                    <a href="{{url('/cart/checkout')}}" class="primary-btn">CHECKOUT SEKARANG</a>
+                    <a href="{{url('/cart/checkout/update')}}" class="primary-btn">CHECKOUT SEKARANG</a>
                 </div>
             </div>
         </div>

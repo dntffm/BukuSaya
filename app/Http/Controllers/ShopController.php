@@ -49,8 +49,8 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-       $data = Category::where("category_name","=",$id)->firstOrFail()->book;
-       return view('shop',compact("data"));
+       $data = Category::where("category_name","=",$id)->paginate(10);
+       return view('shopbycategory',compact("data"));
     }
 
 

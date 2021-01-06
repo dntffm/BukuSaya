@@ -36,4 +36,26 @@ class CartController extends Controller
         alert()->success('Berhasil','Barang Ditambah ke Keranjang');
         return redirect('/cart');
     }
+
+    public function updateCart(Request $request)
+    {
+        $ids=  $request->id;
+        $amount = $request->jml;
+
+        for ($i=0; $i < count($ids); $i++) { 
+            Cart::update($ids[$i],[
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $amount[$i]
+                )
+            ]); 
+        }
+        return redirect()->back();
+    }
+
+    public function deleteCart($id)
+    {
+        Cart::remove($id);
+        return redirect()->back();
+    }
 }

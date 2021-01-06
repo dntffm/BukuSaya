@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    @foreach ($data as $item)    
+                    @foreach ($data as $item)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="{{asset("img/product/product-12.jpg")}}">

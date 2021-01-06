@@ -20,6 +20,8 @@ Route::resource('shop', 'ShopController');
 Route::get('/shop/product/{id}','ShopController@showproduct');
 Route::get('/cart', 'CartController@index');
 Route::get('/cart/checkout','CartController@checkout');
+Route::post('/cart/checkout/update','CartController@updateCart');
+Route::get('/cart/checkout/delete/{id}','CartController@deleteCart');
 Route::get('/cart/addtocart/{id}','CartController@addToCart');
 Route::resource('/cart/transaction','TransactionController');
 Route::get('/admin','AdminController@index')->middleware('role:admin')->name('admin.page');
