@@ -122,8 +122,6 @@
                                       Hello, {{Auth::user()->name}}
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">            
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{url('/logout')}}" onclick="event.preventDefault(); document.querySelector('#logout-form').submit()">Logout</a>
                                     </div>

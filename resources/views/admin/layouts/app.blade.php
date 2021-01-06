@@ -74,8 +74,7 @@
                         <li><a class="nav-link" href="{{url('/admin/categories')}}"><i class="far fa-square"></i> <span>Kategori</span></a></li>
                         
                         <li class="menu-header">Transaksi</li>
-                        <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Kelola Transaksi</span></a></li>
-                        <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Histori Transaksi</span></a></li>
+                        <li><a href="{{url('/admin/transaction')}}" class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Histori Transaksi</span></a></li>
                       
                        
                         <li class="menu-header">User</li>
@@ -341,6 +340,23 @@
                 </form>
                 `,
                 center : true
+            })
+        })
+        $('.detailtrns').on('click',function(){
+            let id = this.dataset.id
+            let uri = encodeURI('http://localhost/tokobuku/BukuSaya/public/admin/product-admin/' + id)
+            let data = reqData(uri, 'GET', false)
+            $('#detailtrns-'+id).fireModal({
+                title: 'Detail Transaksi : no. #' + id,
+                body: `
+                        <ul class="list-group">
+                            <li class="list-group-item">Judul Buku: ${data.title}</li>
+                            <li class="list-group-item">Harga : ${data.price}</li>
+                            <li class="list-group-item">Kategori : ${data.category[0].category_name}</li>
+                            <li class="list-group-item">Penulis : ${data.author}</li>
+                            <li class="list-group-item">Penerbit : ${data.publisher}</li>
+                        </ul>
+                        `
             })
         })
     </script>

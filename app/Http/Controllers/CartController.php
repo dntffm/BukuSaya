@@ -39,16 +39,22 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
+        
         $ids=  $request->id;
         $amount = $request->jml;
-
-        for ($i=0; $i < count($ids); $i++) { 
+        $i = 0;
+        foreach(Cart::getContent() as $item) { 
             Cart::update($ids[$i],[
                 'quantity' => array(
                     'relative' => false,
                     'value' => $amount[$i]
                 )
             ]); 
+
+            if($item->qty < 1){
+                Cart::remove($item->id);
+            }
+            $i++;
         }
         return redirect()->back();
     }

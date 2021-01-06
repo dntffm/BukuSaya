@@ -22,7 +22,7 @@
     <div class="container">
         <div class="checkout__form">
             <h4>Detail Transaksi</h4>
-            <form action="{{url('/cart/transaction')}}" method="POST">
+            <form action="{{url('/cart/transactions')}}" method="POST">
                 @csrf
                 <input type="hidden" name="iduser" value="{{Auth::user()->id}}">
                 <input type="hidden" name="bukus" value="{{\Cart::getContent()}}">

@@ -88,7 +88,7 @@
                     <ul>
                         <li>Total <span>{{Cart::getTotal()}}</span></li>
                     </ul>
-                    <a href="{{url('/cart/checkout/update')}}" class="primary-btn">CHECKOUT SEKARANG</a>
+                    <a href="{{url('/cart/checkout')}}" class="primary-btn">CHECKOUT SEKARANG</a>
                 </div>
             </div>
         </div>

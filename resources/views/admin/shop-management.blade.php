@@ -52,7 +52,7 @@
                         <td>{{$item->title}}</td>
                         <td>{{$item->price}}</td>
                         <td>
-                        <img alt="image" src="{{asset('vendor/stisla/img/avatar/avatar-5.png')}}" class="rounded-circle" width="35" data-toggle="tooltip" title="Wildan Ahdian">
+                        <img alt="image" src="{{asset('storage/bookcover/').'/'.$item->images}}" width="35" data-toggle="tooltip">
                         </td>
                         <td>{{$item->stock}}</td>
                         <td>{{$item->category[0]->category_name}}</td>

@@ -27,13 +27,13 @@
     </div> --}}
     <div class="sidebar__item">
         <div class="latest-product__text">
-            <h4>Buku Baru</h4>
+            {{-- <h4>Buku Baru</h4>
             <div class="latest-product__slider owl-carousel">
                 @foreach (App\Book::limit(5)->get() as $item)             
                     <div class="latest-prdouct__slider__item">
                         <a href="{{url('/shop/product').'/'.$item->id}}" class="latest-product__item">
                             <div class="latest-product__item__pic">
-                                <img src="{{asset("img/latest-product/lp-1.jpg")}}" alt="">
+                                <img src="{{asset('storage/bookcover').'/'.$item->images}}" alt="">
                             </div>
                             <div class="latest-product__item__text">
                                 <h6>{{$item->title}}</h6>
@@ -42,7 +42,7 @@
                         </a>
                     </div>
                 @endforeach
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

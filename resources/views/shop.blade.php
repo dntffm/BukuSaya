@@ -55,7 +55,7 @@
                     @foreach ($data as $item)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset("img/product/product-12.jpg")}}">
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('storage/bookcover').'/'.$item->images}}">
                                     <ul class="product__item__pic__hover">
                                         
                                         <li><a href="{{url('/cart/addtocart').'/'.$item->id}}"><i class="fa fa-shopping-cart"></i></a></li>

@@ -53,7 +53,8 @@ class AdminProductController extends Controller
        }
 
        $cover = $request->file('cover');
-       $path = '/storage/bookcover';
+    
+       $path =  'storage/bookcover';
        $filename = time().'_'.$cover->getClientOriginalName();
 
        $cover->move($path,$filename);

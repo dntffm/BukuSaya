@@ -7,17 +7,17 @@ use App\Transaction;
 
 class TransactionController extends Controller
 {
-    public function store(Request $request)
+    
+    public function save(Request $request)
     {
-       
         $trans = new Transaction;
 
         $trans->user_id = $request->iduser;
         $trans->recipient = $request->penerima;
         $trans->address = $request->alamat.' Kota '.$request->kota.' '.$request->kodepos;
         $trans->phone = $request->telepon;
-        $newTrans = Transaction::latest()->take(1)->firstOrFail(); 
         if( $trans->save()){
+            $newTrans = Transaction::latest()->take(1)->firstOrFail(); 
             $books = json_decode($request->bukus,true);
             foreach($books as $item){
                 $data = [
