@@ -49,8 +49,13 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-       $data = Category::where("category_name","=",$id)->paginate(10);
+        //$cat = Category::where("category_name","=",$id)->firstOrFail();
+        $data = Book::whereHas('category',function($query) use($id){
+           $query->where('category_name','=',$id);
+           
+       })->paginate(10);
        return view('shopbycategory',compact("data"));
+
     }
 
 

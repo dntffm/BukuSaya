@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Transaction;
-
+use App\Book;
 class TransactionController extends Controller
 {
     
@@ -24,6 +24,9 @@ class TransactionController extends Controller
                     "amount" =>$item["price"]*$item["quantity"],
                     "pay_amount" =>$item["price"]*$item["quantity"],
                 ];
+                $book = Book::find($item["id"]);
+                $book->stock = $book->stock - $item["quantity"];
+                $book->save();
                 $newTrans->book()->attach($item["id"],$data);
             }
             \Cart::clear();

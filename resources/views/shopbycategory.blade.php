@@ -55,15 +55,14 @@
                     @foreach ($data as $index=>$item)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset("storage/bookcover").'/'.$item->images}}">
-                                    <ul class="product__item__pic__hover">
-                                        
-                                        <li><a href="{{url('/cart/addtocart').'/'.$item->book[$index]->id}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                <div class="product__item__pic set-bg" data-setbg="{{asset('storage/bookcover').'/'.$item->images}}">
+                                    <ul class="product__item__pic__hover">                    
+                                        <li><a href="{{url('/cart/addtocart').'/'.$item->id}}"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="{{url('/shop/product').'/'.$item->book[$index]->id}}">{{$item->book[$index]->title}}</a></h6>
-                                    <h5>{{$item->book[$index]->price}}</h5>
+                                    <h6><a href="{{url('/shop/product').'/'.$item->id}}">{{$item->title}}</a></h6>
+                                    <h5>{{$item->price}}</h5>
                                 </div>
                             </div>
                         </div>

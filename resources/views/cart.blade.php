@@ -43,7 +43,7 @@
                                 <input type="hidden" name="id[]" value="{{$item->id}}">
                                <tr>
                                    <td class="shoping__cart__item">
-                                       <img src="img/cart/cart-1.jpg" alt="">
+                                       <img width="50px" src="{{asset('storage/bookcover').'/'.App\Book::find($item->id)->images}}" alt="">
                                        <h5>{{$item->name}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">

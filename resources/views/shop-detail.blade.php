@@ -51,11 +51,11 @@
                         vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
                         quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
                     <div class="product__details__quantity">
-                        <div class="quantity">
+                       {{--  <div class="quantity">
                             <div class="pro-qty">
                                 <input type="text" value="1">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <a href="{{url('/cart/addtocart').'/'.$data->id}}" class="primary-btn">ADD TO CARD</a>
                     

@@ -11,4 +11,9 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Book');
     }
+
+    public function scopeCategoryName($query,$name)
+    {
+        return $query->where('category_name',$name);
+    }
 }

@@ -65,14 +65,14 @@
                             <h4>Transaksi Kamu</h4>
                             <div class="checkout__order__products">Produk <span>Total</span></div>
                             <ul>
-                                    <?php  $total = 0; ?>
+                                   
                                     @foreach (\Cart::getContent() as $item)
-                                        <?php $total += $item->price; ?>
+                                   
                                         <li>{{$item->name}} <span>{{$item->price}}</span></li>
                                     @endforeach
                                 </ul>
                                 
-                                <div class="checkout__order__total">Total <span>{{$total}}</span></div>
+                                <div class="checkout__order__total">Total <span>{{Cart::getTotal()}}</span></div>
                                 
                                 <button type="submit" class="site-btn">BAYAR SEKARANG</button>
                             </div>

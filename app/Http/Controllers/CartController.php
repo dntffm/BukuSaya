@@ -24,7 +24,7 @@ class CartController extends Controller
     {
         
         $data = Book::find($id);
-       
+        
         Cart::add(array(
            'id' => $data->id,
            'name' => $data->title,
@@ -39,11 +39,20 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
+
+        
         
         $ids=  $request->id;
         $amount = $request->jml;
         $i = 0;
         foreach(Cart::getContent() as $item) { 
+            $book = Book::find($ids[$i]);
+            
+            if($book->stock < $amount[$i]){
+                alert()->warning('Gagal Update','Stok TIdak Cukup');
+                return redirect('/cart');
+            }
+
             Cart::update($ids[$i],[
                 'quantity' => array(
                     'relative' => false,
@@ -51,7 +60,7 @@ class CartController extends Controller
                 )
             ]); 
 
-            if($item->qty < 1){
+            if($item->quantity == 0){
                 Cart::remove($item->id);
             }
             $i++;
